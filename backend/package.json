@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "getting started",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js",
+    "upload": "nodemon src/controller/upload.js"
+  },
+  "author": "tanmay",
+  "license": "ISC",
+  "dependencies": {
+    "@pinecone-database/pinecone": "^2.0.1",
+    "@prisma/client": "^5.9.1",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "openai": "^4.28.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "prisma": "^5.9.1"
+  }
+}
