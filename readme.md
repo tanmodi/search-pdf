@@ -15,7 +15,7 @@ npm run start
 in second terminal 
 
 ```bash
-cd frontend
+cd front
 npm install
 npm i -D
 

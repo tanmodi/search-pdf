@@ -7,10 +7,6 @@ export async function getFunctionCall(
   call,
   model = "gpt-3.5-turbo"
 ) {
-  // call type object
-  // tool object/array array
-  // content string
-  // model string if not given it take default value
   dotenv.config();
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -29,6 +25,3 @@ export async function getFunctionCall(
 
   return response;
 }
-// module.exports = {
-//   getFunctionCall
-// }

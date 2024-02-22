@@ -16,27 +16,27 @@
 //     setQuestion(e.target.value)
 //   }
 
-// //   const handleSubmit = async () => {
-// //     if (username && question) {
-// //       const formData = new FormData()
-// //       formData.append('username', username)
-// //       formData.append('question', question)
-// //       const response = await fetch('/api/submit', {
-// //         method: 'POST',
-// //         body: formData,
-// //       })
-// //       if (response.ok) {
-// //         // set the message state variable to the success message
-// //         setMessage('Form submitted successfully')
-// //       } else {
-// //         // set the message state variable to the error message
-// //         setMessage('Something went wrong')
-// //       }
-// //     } else {
-// //       // set the message state variable to the validation message
-// //       setMessage('Please fill all the fields')
-// //     }
-// //   }
+//   const handleSubmit = async () => {
+//     if (username && question) {
+//       const formData = new FormData()
+//       formData.append('username', username)
+//       formData.append('question', question)
+//       const response = await fetch('/api/submit', {
+//         method: 'POST',
+//         body: formData,
+//       })
+//       if (response.ok) {
+//         // set the message state variable to the success message
+//         setMessage('Form submitted successfully')
+//       } else {
+//         // set the message state variable to the error message
+//         setMessage('Something went wrong')
+//       }
+//     } else {
+//       // set the message state variable to the validation message
+//       setMessage('Please fill all the fields')
+//     }
+//   }
 
 // // import axios at the top of the file
 
@@ -99,47 +99,66 @@ export default function UserForm() {
     };
 
     // use axios.post instead of fetch
+    // const handleSubmit = async () => {
+    //     if (username && question) {
+    //         // create an object with the username and question properties
+    //         const data = {
+    //             username,
+    //             question,
+    //         };
+    //         // use axios.post to send the data to the url
+    //         axios
+    //             .post("/search", data, {
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //             })
+    //             .then(function (response) {
+    //                 // access the response data
+    //                 console.log(response.data);
+    //                 // set the message state variable to the response data
+    //                 setMessage("The server responded with: " + response.data);
+    //             })
+    //             .catch(function (error) {
+    //                 // access the error response data
+    //                 console.log(error.response.data);
+    //                 // set the message state variable to the error message
+    //                 setMessage(
+    //                     "The server responded with: " +
+    //                         error.response.data +
+    //                         ". Please try again later."
+    //                 );
+    //             });
+    //     } else {
+    //         // set the message state variable to the validation message
+    //         setMessage("Please fill all the fields");
+    //     }
+    // };
+    const [message, setMessage] = useState('')
     const handleSubmit = async () => {
         if (username && question) {
-            // create an object with the username and question properties
-            const data = {
-                username,
-                question,
-            };
-            // use axios.post to send the data to the url
-            axios
-                .post("/search", data, {
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                })
-                .then(function (response) {
-                    // access the response data
-                    console.log(response.data);
-                    // set the message state variable to the response data
-                    setMessage("The server responded with: " + response.data);
-                })
-                .catch(function (error) {
-                    // access the error response data
-                    console.log(error.response.data);
-                    // set the message state variable to the error message
-                    setMessage(
-                        "The server responded with: " +
-                            error.response.data +
-                            ". Please try again later."
-                    );
-                });
+          const formData = new FormData()
+          formData.append('username', username)
+          formData.append('question', question)
+          const response = await fetch('/search', {
+            method: 'POST',
+            body: formData,
+          })
+          if (response.ok) {
+            // set the message state variable to the success message
+            setMessage(response.data)
+          } else {
+            // set the message state variable to the error message
+            setMessage('Something went wrong')
+          }
         } else {
-            // set the message state variable to the validation message
-            setMessage("Please fill all the fields");
+          // set the message state variable to the validation message
+          setMessage('Please fill all the fields')
         }
-    };
+      }
 
     return (
-        <div
-            className="flex flex-col items-center justify-center min-h-screen"
-            class="dk"
-        >
+        <div className="flex flex-col items-center justify-center min-h-screen">
             <h1 className="text-4xl font-bold text-pink-600 mb-4">User Form</h1>
             <div className="max-w-md p-4 bg-white shadow-lg rounded-lg">
                 <Input
