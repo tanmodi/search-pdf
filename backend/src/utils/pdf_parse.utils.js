@@ -1,14 +1,19 @@
-import { readFileSync } from "fs";
-import pdf from "pdf-parse";
+import { PdfReader } from "pdfreader";
 
 export async function parsePdf(pdfPath) {
-    // let buffer = readFileSync(pdfPath);
-    // const text = await pdf(buffer).then(function (data) {
-    //     return data.text;
-    // });
-    // console.log("data", pdfPath);
-    return `hey how`;
+  return new Promise((resolve, reject) => {
+    let text = "";
+    new PdfReader().parseFileItems(pdfPath, (err, item) => {
+      if (err) {
+        // handle error
+        reject(err);
+      } else if (!item) {
+        // end of file
+        resolve(text);
+      } else if (item.text) {
+        // append text
+        text = text + item.text + "\n";
+      }
+    });
+  });
 }
-// exports = {
-// 	parsePdf
-// }
