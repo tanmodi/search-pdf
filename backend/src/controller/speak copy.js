@@ -1,14 +1,11 @@
-
-
-
-import { parsePdf } from "../utils/pdf_parse.utils.js";
 import { sendPineconeEmbedding } from "../utils/pinecone_send.utils.js";
 import { getEmbedding } from "../utils/openai_embedding.utils.js";
+import {getTranscription} from "../utils/whisper.utils.js";
 
-export async function uploadData(filename, namespace) {
+export async function speakSearch(filename, namespace) {
   try {
-    const pdfPath = `./resources_for_files/${filename}`;
-    const text = await parsePdf(pdfPath);
+    const audioPath = `./resources_for_files/audio/${filename}`;
+    const text = await getTranscription(audioPath);
     let words = text.split(/\s+/);
     let chunks = [];
     for (let i = 0; i < words.length; i += 50) {
